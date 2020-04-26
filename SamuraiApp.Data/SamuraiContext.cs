@@ -31,7 +31,7 @@ namespace SamuraiApp.Data
             //var sensitiveData = logger.EnableSensitiveDataLogging(true);
             //sensitiveData.UseSqlServer("Server = LENOVO-VEERAM; Database = SamuraiAppData; Trusted_Connection = True; ");
                         
-
+            // Second Commit
             optionsBuilder
                 .UseLoggerFactory(MyConsoleLoggerFactory)
                 .EnableSensitiveDataLogging(true)
