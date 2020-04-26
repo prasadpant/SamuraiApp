@@ -27,10 +27,20 @@ namespace SamuraiApp.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //var logger = optionsBuilder.UseLoggerFactory(MyConsoleLoggerFactory);
+            //var sensitiveData = logger.EnableSensitiveDataLogging(true);
+            //sensitiveData.UseSqlServer("Server = LENOVO-VEERAM; Database = SamuraiAppData; Trusted_Connection = True; ");
+                        
+
             optionsBuilder
                 .UseLoggerFactory(MyConsoleLoggerFactory)
                 .EnableSensitiveDataLogging(true)
                 .UseSqlServer("Server = LENOVO-VEERAM; Database = SamuraiAppData; Trusted_Connection = True; ");
+
+            //TestClass testClassNamePerNaga  = new TestClass();
+            //testClassNamePerNaga.add().subtract(10,5);
+            
+                
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
