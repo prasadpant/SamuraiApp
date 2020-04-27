@@ -48,8 +48,6 @@ namespace SomeUI
             }
 
             Console.ReadKey();
-            // master changes
-            // changes on feature branch delete  which is tracking master branch on server
         }
 
         private static void SimpleSamuraiQuery()
