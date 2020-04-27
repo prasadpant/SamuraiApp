@@ -48,9 +48,6 @@ namespace SomeUI
             }
 
             Console.ReadKey();
-            // master changes
-
-            // New feature changes
         }
 
         private static void SimpleSamuraiQuery()
