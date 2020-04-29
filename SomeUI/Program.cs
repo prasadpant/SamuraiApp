@@ -27,7 +27,16 @@ namespace SomeUI
             //DeleteSamurais();
             //DeleteMultipleSamurais();
 
-            DeleteBySamuraiID();
+            //DeleteBySamuraiID();
+
+            //GetSamuraisUsingSQLQuery();
+
+            //This method can be used only in .Net Core 3.1
+            //QueryUsingRawSQLWithInterpolation();
+
+            QueryUsingFromSQLStoredProc();
+
+
 
 
         }
@@ -147,8 +156,48 @@ namespace SomeUI
             int samuraiID = 7;
 
             _context.Database.ExecuteSqlCommand("exec DeleteSamuraiByID {0}", samuraiID);
-            
+
+            //_context.Samurais.FromSql(""); -- This is for Select queries.
             Console.ReadLine();
+        }
+
+        private static void GetSamuraisUsingSQLQuery()
+        {
+            //var samurais = _context.Samurais.FromSql("Select * from Samurais").ToList();
+            //Samurais Left Join With Quotes and SamuraiBattles ( This will bring Quotes and Samuraibattles in samurai Object)
+            var samurais = _context.Samurais.FromSql("Select * from Samurais").Include(s => s.Quotes).Include(s => s.SamuraiBattles);
+            foreach (var Sam in samurais)
+            {
+                Console.WriteLine(Sam.Id + " " + Sam.Name);
+
+                if (Sam.Quotes != null)
+                {
+                    for (int i = 0; i < Sam.Quotes.Count; i++)
+                    {
+                        Console.WriteLine(Sam.Quotes[i].Text);
+                    }
+                }
+
+            }
+            Console.ReadLine();
+        }
+
+        private static void QueryUsingRawSQLWithInterpolation()
+        {
+            string name = "Kiya";
+            /* FromSQLInterpolated is available only on EFCore 3.1
+            var samurais = _context.Samurais
+                .FromSqlInerpolated($"Select * from Samurais Where Name = {name}")
+                .ToList();
+            */
+        }
+
+        private static void QueryUsingFromSQLStoredProc()
+        {
+            var text = "Satish";
+            var samurais = _context.Samurais.FromSql("EXEC dbo.GetSamurais {0}", text).ToList();
+            Console.ReadLine();
+
         }
     }
 }
